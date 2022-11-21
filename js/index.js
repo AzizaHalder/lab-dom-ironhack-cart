@@ -3,14 +3,14 @@
 function updateSubtotal(product) {
   console.log('Calculating subtotal, yey!');
   const price = product.querySelector('.price span').innerHTML;
+
   const quantity = product.querySelector('.quantity input').value;
-  const subtotalPrice = price * quantity;
-  // const subtotalPrice = parseFloat(price) * quantity;
-  // Use parseInt() instead of Number
-  const subtotal = Number(
-    (product.querySelector('.subtotal span').innerHTML = subtotalPrice)
-  );
-  console.log(subtotal);
+
+  const subtotalPrice = parseFloat(price) * quantity;
+
+  const subtotal = (product.querySelector('.subtotal span').innerHTML =
+    subtotalPrice);
+
   return subtotal;
 }
 
@@ -21,17 +21,20 @@ function calculateAll() {
   // updateSubtotal(singleProduct);
   // end of test
 
-  // ITERATION 2 & 3
+  // ITERATION 2
 
   const products = document.getElementsByClassName('product');
   const productsList = [...products];
 
   let total = 0;
 
-  for (let i = 0; i < productsList.length; i++) {
+  for (let i = 0; i < productsList.length; i += 1) {
     total += updateSubtotal(productsList[i]);
   }
-  console.log(total);
+
+  // ITERATION 3
+  const finalPrice = document.querySelector('#total-value span');
+  finalPrice.innerHTML = total;
 
   /*
   Felipe's solution
@@ -60,7 +63,8 @@ function createProduct() {
 window.addEventListener('load', () => {
   const calculatePricesBtn = document.getElementById('calculate');
   calculatePricesBtn.addEventListener('click', calculateAll);
-
+  // const calculateTotalBtn
+  // if (button.id === 'calculate') button.addEventListener('click', calculateAll);
   /* Felipe's solution
   const removeBtns = [...document.getElementsByClassName('btn-remove')];
   removeBtns.forEach((button) =>
